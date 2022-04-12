@@ -1,0 +1,20 @@
+.container{
+	width: 300px;
+	margin: 30px auto;
+}
+input:not(:last-child){
+	padding: 10px 10px;
+	border-radius: 5px;
+	width: 300px;
+	outline: none;
+	border: 1px solid #eee;
+}
+.submit{
+	font-size: 18px;
+	width: 80px;
+	height: 40px;
+	border: 0;
+	border-radius: 5px;
+	background-color: #eee;
+	margin-top: 20px;
+}

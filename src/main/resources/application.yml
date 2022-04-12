@@ -1,0 +1,54 @@
+info:
+  build:
+    artifact : @project.artifactId@
+    name : @project.name@
+    description : @project.description@
+    version : @project.version@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: @project.description@
+
+logging:
+  name: shorturl
+  path: /tmp/logs/
+---
+#dev 环境
+spring:
+  profiles: dev
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/short_url?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    timeout: 3000
+    prefix: url
+server:
+  tomcat:
+    max-threads: 100
+    min-spare-threads: 20
+  port: 8081
+  connection-timeout: 5000
+shorturl:
+  incrkey: surl_index
+  http_prefix: 127.0.0.1:${server.port}/
+
+---
+#pub config
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+  executor-type: simple
+  type-aliases-package: com.example.shorturl.web.entity
+
+management:
+  security:
+    enabled: false
+
+spiderdt:
+  task-thread-nums: 32
